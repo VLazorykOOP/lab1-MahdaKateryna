@@ -166,6 +166,19 @@ void MenuTask()
     cout << "    4.  Dynamic array : vector \n";
     cout << "    5.  Exit \n";
 }
+void WriteArraysTextFile(int x1, int x2, double* a, double* b, const char* t)
+{
+    ofstream fout(t);
+    if (fout.fail()) return;
+    fout << x1 << endl;
+    
+    for (int i = 0; i < x1; i++)
+        fout << a[i] << "   ";
+    fout << endl;
+    for (int i = 0; i < x2; i++)
+        fout << b[i] << "   ";
+    fout.close();
+}
 void MenuInput()
 {
     cout << "     Menu Input   \n";
@@ -180,10 +193,22 @@ void Task1()
 {
     int n, j = 0;
     double A[MAX_SIZE], B[MAX_SIZE];
+   
+
     n = ConsoleInputArray(MAX_SIZE, A);
+    WriteArrayBinFile(n, A, "Write.bin");
+    WriteArrayTextFile(n, A, "Write.txt");
+    WriteArrayBinFile(n, A, "Read.bin");
+    WriteArrayBinFile(n, A, "Read.bin");
+
     for (int i = 0; i < n; i++)
-        if (A[i] != 0)
+        if (A[i] != 0) 
             B[j++] = A[i];
+    WriteArrayBinFile(j, B, "Write.bin");
+    WriteArrayTextFile(j, B, "Write.txt");
+    WriteArrayBinFile(j, B, "Read.bin");
+    WriteArrayBinFile(j, B, "Read.bin");
+    WriteArraysTextFile(n, j, A, B, "Write.txt");
 
     cout << "Array B witout zero elements: ";
     for (int i = 0; i < j; i++) {
